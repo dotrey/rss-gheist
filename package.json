@@ -1,6 +1,6 @@
 {
   "name": "rss-gheist",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "description": "A simple, browser based rss reader",
   "scripts": {
     "test": "ts-mocha -p ./tsconfig.mocha.json src/**/*.spec.ts",
