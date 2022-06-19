@@ -1,0 +1,334 @@
+html, body {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    font-size: medium;
+
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    color: #000000;
+    background-color: #c0ffee;
+    background: linear-gradient(135deg, #c0ffee 0%, #314159 100%);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    display: grid;
+    grid-template-columns: 33% 0.5rem 1fr;
+    grid-template-rows: 1fr 0.5rem auto;
+    grid-template-areas: 
+        "list . details"
+        ". . details"
+        "settings . details"
+        ;
+    justify-content: stretch;
+    align-content: stretch;
+}
+
+@media screen and (max-width:1240px) {
+    main {
+        grid-template-columns: 40% 0.5rem 1fr;
+    }
+}
+
+@media screen and (max-width:1024px) {
+    main {
+        grid-template-columns: 46% 0.5rem 1fr;
+    }
+}
+
+@media screen and (max-width:900px) {
+    main {
+        grid-template-columns: 100%;
+        grid-template-rows: 1fr 0.25rem 33% auto;
+        grid-template-areas: 
+            "details"
+            "."
+            "list"
+            "settings"
+            ;
+    }
+}
+
+.subscription-list {
+    position: relative;
+    background-color: #ffffff;
+    grid-area: list;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #eeeeee;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+}
+
+.subscription-list .subscription {
+    position: relative;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eeeeee;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 
+        "title title title title"
+        "url url url url"
+        "datec datec dater dater"
+        "delete . notification refresh"
+    ;
+}
+
+.subscription-list .subscription.selected::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.25rem;
+    height: 100%;
+    display: block;
+    content: "";
+    background-color: #ff6600;
+}
+
+.subscription-list .subscription .title {
+    position: relative;
+    justify-self: stretch;
+    line-height: 1.5;
+    font-size: 125%;
+    word-break: break-all;
+    grid-area: title;
+}
+
+.subscription-list .subscription .url {
+    position: relative;
+    justify-self: stretch;
+    line-height: 1.1;
+    padding: 0.2rem 0;
+    font-size: 90%;
+    word-break: break-all;
+    grid-area: url;
+    color: #666666;
+}
+
+.subscription-list .subscription .date-content,
+.subscription-list .subscription .date-refresh {
+    position: relative;
+    justify-self: stretch;
+    line-height: 1.5;
+    font-size: 90%;
+    grid-area: datec;
+}
+
+.subscription-list .subscription .date-refresh {
+    grid-area: dater;
+    text-align: right;
+}
+
+.subscription-list .subscription input[type="checkbox"] {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    font-size: 1rem;
+}
+
+.subscription-list .subscription .autorefresh,
+.subscription-list .subscription .notification,
+.subscription-list .subscription .delete{
+    position: relative;
+    justify-self: start;
+    line-height: 1;
+    font-size: 90%;
+    grid-area: refresh;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.subscription-list .subscription .autorefresh {
+    padding-right: 0;
+}
+
+.subscription-list .subscription .notification {
+    grid-area: notification;
+    text-align: right;
+}
+
+.subscription-list .subscription .delete {
+    justify-self: start;
+    align-self: center;
+    grid-area: delete;
+    color: #ff0000;
+    font-weight: bold;
+    background-color: #ffdddd;;
+}
+
+.subscription-details {
+    position: relative;
+    background-color: #ffffff;
+    grid-area: details;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border: 1px solid #eeeeee;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+}
+
+.subscription-details .channel-item {
+    position: relative;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 
+        "date link"
+        "title title"
+        "body body"
+    ;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.subscription-details .channel-item-date {
+    position: relative;
+    font-size: 90%;
+    color: #666666;
+    text-align: left;
+    line-height: 1.5;
+    grid-area: date;
+}
+
+.subscription-details .channel-item-link {
+    position: relative;
+    font-size: 90%;
+    text-align: right;
+    line-height: 1.5;
+    grid-area: link;
+}
+
+.subscription-details .channel-item-title {
+    position: relative;
+    font-size: 125%;
+    line-height: 1.5;
+    font-weight: bold;
+    grid-area: title;
+}
+
+.subscription-details .channel-item-body {
+    position: relative;
+    line-height: 1.5;
+    grid-area: body;
+}
+
+.subscription-details .greeting {
+    position: relative;
+    padding: 1rem;
+}
+
+.subscription-details .greeting h1 {
+    font-size: 400%;
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+.subscription-details .greeting h2 {
+    margin-top: 2em;
+    font-size: 200%;
+    font-weight: normal;
+}
+
+.subscription-details .greeting p {
+    line-height: 1.5;
+}
+
+.subscription-details .greeting code {
+    display: inline-block;
+    padding: 0 0.5em;
+    background-color: #eeeeee;
+    border: 1px solid #999999;
+}
+
+.settings {
+    position: relative;
+    grid-area: settings;
+    background-color: #f9f9f9;
+    overflow: hidden;
+    padding: 1rem;
+    border: 1px solid #eeeeee;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0.5rem;
+}
+
+.settings .setting {
+    position: relative;
+    display: block;
+}
+
+.settings .setting-name {
+    position: relative;
+    font-weight: normal;
+    font-size: 125%;
+    line-height: 2;
+}
+
+@media screen and (max-width:900px) {
+    .settings {
+        height: 2rem;
+        overflow: hidden;
+    }
+    .settings::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3rem;
+        line-height: 2rem;
+        display: block;
+        text-align: center;
+        content: "\2191 Add RSS Feed \2191";
+        background-color: inherit;
+    }
+
+    .settings:focus-within {
+        height: auto;
+    }
+    .settings:focus-within::after {
+        display: none;
+    }
+}
+
+.first-element-fill-h {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0.5rem;
+}
+
+.first-element-fill-h>* {
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
+.first-element-fill-h>*:first-child {
+    flex-grow: 1;
+}
